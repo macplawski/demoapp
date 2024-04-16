@@ -2,10 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Test') {
+        stage('Build') {
             steps {
                 script {
                     docker.build("demoapp:${env.BUILD_ID}")
+                }
+            }
+        }
+        stage('Deploy'){
+            steps {
+                script {
+                    ls -la
                 }
             }
         }
