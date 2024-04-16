@@ -11,7 +11,9 @@ pipeline {
         }
         stage('Deploy'){
             steps {
+                  sh 'pwd'
                   sh 'ls -la'
+                  sh 'docker ps -a'
             }
         }
     }
