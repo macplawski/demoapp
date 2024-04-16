@@ -7,7 +7,7 @@ pipeline {
                 script {
                     def hostname = InetAddress.getLocalHost().getHostName()
 
-                    def currentDate = new Date()
+                    def currentDate = getCurrentDateTime()
                     def formattedDate = currentDate.format("dd.MM.yyyy")
                     sh "sed -i 's/JOB_DATE/${formattedDate} ${hostname}/g' src/main/java/Hello.java"
 
