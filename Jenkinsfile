@@ -5,8 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    job-date=`date`
-                    hostname-env=`hostname`
+                    job-date=$(date +%d.%m.%Y)
+                    hostname-env=$(hostname)
                     sed -i "s/JOB_DATE/$job-date $hostname-env/g" src/main/java/Hello.java
                     docker.build("demoapp:${env.BUILD_ID}")
                 }
