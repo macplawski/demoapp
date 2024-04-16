@@ -5,9 +5,12 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    job-date=$(date +%d.%m.%Y)
-                    hostname-env=$(hostname)
-                    sed -i "s/JOB_DATE/$job-date $hostname-env/g" src/main/java/Hello.java
+                    def hostname = InetAddress.getLocalHost().getHostName()
+
+                    def currentDate = new Date()
+                    def formattedDate = currentDate.format("dd.MM.yyyy")
+                    sh "sed -i "s/JOB_DATE/${formattedDate} ${hostname}/g" src/main/java/Hello.java"
+
                     docker.build("demoapp:${env.BUILD_ID}")
                 }
             }
