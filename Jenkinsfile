@@ -11,9 +11,7 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                script {
                     ls -la
-                }
             }
         }
     }
