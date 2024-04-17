@@ -6,9 +6,8 @@ pipeline {
             steps {
                 script {
                     def now = new Date()
-                    println now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
-                    sh "sed -i 's/JOB_DATE/${now.format("yyyyMMddHHmm")} /g' src/main/java/Hello.java"
-                    sh "cat src/main/java/Hello.java"
+                    println now.format("yy.MM.dd.HH.mm", TimeZone.getTimeZone('UTC'))
+                    sh "sed -i 's/JOB_DATE/${now.format("yyyy.MM.dd-HH.mm")} /g' src/main/webapp/index.jsp"
                     docker.build("demoapp:${env.BUILD_ID}", "--no-cache .")
                 }
             }
