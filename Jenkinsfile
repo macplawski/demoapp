@@ -8,8 +8,8 @@ pipeline {
                     def now = new Date()
                     println now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
                     sh "sed -i 's/JOB_DATE/${now.format("yyyyMMddHHmm")} /g' src/main/java/Hello.java"
-
-                    docker.build("demoapp:${env.BUILD_ID}")
+                    sh "cat src/main/java/Hello.java"
+                    docker.build("demoapp:${env.BUILD_ID}", "--no-cache")
                 }
             }
         }
