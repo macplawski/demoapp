@@ -16,9 +16,9 @@ pipeline {
         stage('Deploy'){
             steps {
                 script {
-                    EXISTS = sh(script: 'docker service ls | grep demoapp', returnStdout: true).trim()
+                    EXISTS = sh(script: 'docker service ls | grep demoapp | wc -l', returnStdout: true).trim()
                     sh 'echo $EXISTS'
-                    if ("$EXISTS" != '') {
+                    if ("$EXISTS" == '1') {
                         sh "docker service update --image=demoapp:${env.BUILD_ID} demoapp"
                     } else {
                         sh "docker service create --name demoapp -p 8080:8080 --replicas 3 demoapp:${env.BUILD_ID} "
