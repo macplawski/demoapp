@@ -17,6 +17,7 @@ pipeline {
             steps {
                 script {
                     EXISTS = sh(script: 'docker service ls | grep demoapp', returnStdout: true).trim()
+                    sh 'echo $EXISTS'
                     if ("$EXISTS" == '') {
                         sh "docker service create --name demoapp -p 8080:8080 --replicas 3 demoapp:${env.BUILD_ID} "
                     } else {
